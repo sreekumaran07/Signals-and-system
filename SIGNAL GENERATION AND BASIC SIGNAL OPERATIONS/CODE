@@ -1,0 +1,26 @@
+1.1 Generation of Continuous Time Signals
+clc;
+clear;
+close all;
+t = -5:0.01:5;
+x = sin(2*pi*t);
+figure;
+plot(t, x, 'LineWidth', 2);
+grid on;
+title('Continuous Time Sine Signal');
+xlabel('Time (seconds)');
+ylabel('Amplitude');
+
+
+1.2 Generation of Discrete Time Signal
+clc;
+clear;
+close all;
+n = -10:10;
+x = sin(0.2*pi*n);
+figure;
+stem(n, x, 'filled');
+grid on;
+title('Discrete Time Sinusoidal Signal');
+xlabel('Sample Index (n)');
+ylabel('Amplitude');
