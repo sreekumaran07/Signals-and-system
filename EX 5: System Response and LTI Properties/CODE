@@ -1,0 +1,56 @@
+5.1 Impulse Response of the System
+
+clc;
+clear;
+close all;
+% Sample index
+n = 0:10;
+% Unit impulse input
+x = [1 zeros(1,10)];
+% System: y(n)=x(n)+0.5x(n-1)
+b = [1 0.5];
+a = [1];
+% Impulse response
+h = filter(b,a,x);
+% Display result
+disp('Impulse Response h(n):');
+disp(h);
+% Plot
+figure;
+stem(n,h,'filled');
+grid on;
+title('Impulse Response of the System');
+xlabel('n');
+ylabel('h(n)');
+
+5.2 Step Response of the System
+clc;
+clear;
+close all;
+% Sample index
+n = 0:10;
+% Unit step input
+x = ones(1,length(n));
+% System: y(n)=x(n)+0.5x(n-1)
+b = [1 0.5];
+a = [1];
+
+% Step response
+y = filter(b,a,x);
+% Display result
+disp('Step Response y(n):');
+disp(y);
+% Plot
+figure;
+subplot(2,1,1);
+stem(n,x,'filled');
+grid on;
+title('Unit Step Input u(n)');
+xlabel('n');
+ylabel('Amplitude');
+subplot(2,1,2);
+stem(n,y,'filled');
+grid on;
+title('Step Response of the System');
+xlabel('n');
+ylabel('y(n)');
