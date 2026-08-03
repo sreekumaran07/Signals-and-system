@@ -1,0 +1,59 @@
+8.1 Fourier Transform of Periodic Impulse Train
+clc;
+clear;
+close all;
+% Time axis
+t = -5:0.01:5;
+% Generate periodic impulse train
+x = zeros(size(t));
+x(1:100:end) = 1; % Impulse every 100 samples
+% Fourier Transform
+X = fftshift(fft(x));
+% Frequency axis
+N = length(X);
+f = linspace(-50,50,N);
+% Plotting
+figure;
+subplot(2,1,1);
+stem(t,x,'filled');
+grid on;
+title('Periodic Impulse Train');
+xlabel('Time');
+ylabel('Amplitude');
+subplot(2,1,2);
+stem(f,abs(X));
+grid on;
+title('Magnitude Spectrum');
+xlabel('Frequency');
+ylabel('|X(f)|');
+
+8.2 Discrete-Time Fourier Transform (DTFT)
+clc;
+clear;
+close all;
+% Input sequence
+x = [1 2 3 4];
+% Frequency range
+w = -pi:0.01:pi;
+% DTFT computation
+X = zeros(size(w));
+for k = 1:length(w)
+for n = 1:length(x)
+X(k) = X(k) + x(n)*exp(-1j*w(k)*(n-1));
+end
+end
+
+% Plotting
+figure;
+subplot(2,1,1);
+stem(0:length(x)-1,x,'filled');
+grid on;
+title('Input Sequence x(n)');
+xlabel('n');
+ylabel('Amplitude');
+subplot(2,1,2);
+plot(w,abs(X),'LineWidth',2);
+grid on;
+title('Magnitude Spectrum of DTFT');
+xlabel('\omega (rad/sample)');
+ylabel('|X(e^{j\omega})|');
