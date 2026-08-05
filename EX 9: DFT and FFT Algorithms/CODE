@@ -1,0 +1,71 @@
+9.1 Discrete Fourier Transform (DFT)
+clc;
+clear;
+close all;
+% Input sequence
+x = [1 2 3 4];
+% Length of sequence
+N = length(x);
+% DFT computation
+X = zeros(1,N);
+for k = 0:N-1
+for n = 0:N-1
+X(k+1) = X(k+1) + x(n+1)*exp(-1j*2*pi*k*n/N);
+end
+end
+% Display DFT values
+disp('DFT Output:');
+disp(X);
+% Plotting
+figure;
+subplot(2,1,1);
+stem(0:N-1,x,'filled');
+grid on;
+title('Input Sequence x(n)');
+xlabel('n');
+ylabel('Amplitude');
+subplot(2,1,2);
+stem(0:N-1,abs(X),'filled');
+grid on;
+title('Magnitude Spectrum of DFT');
+xlabel('Frequency Index (k)');
+ylabel('|X(k)|');
+
+
+9.2 Circular Convolution
+clc;
+clear;
+close all;
+% Input sequences
+x1 = [1 2 3 4];
+x2 = [1 1 1 1];
+% Length
+N = max(length(x1),length(x2));
+% DFT of sequences
+X1 = fft(x1,N);
+X2 = fft(x2,N);
+% Circular convolution
+y = ifft(X1.*X2);
+% Display result
+disp('Circular Convolution Output:');
+disp(y);
+% Plotting
+figure;
+subplot(3,1,1);
+stem(0:N-1,x1,'filled');
+grid on;
+title('Sequence x_1(n)');
+xlabel('n');
+ylabel('Amplitude');
+subplot(3,1,2);
+stem(0:N-1,x2,'filled');
+grid on;
+title('Sequence x_2(n)');
+xlabel('n');
+ylabel('Amplitude');
+subplot(3,1,3);
+stem(0:N-1,real(y),'filled');
+grid on;
+title('Circular Convolution Output');
+xlabel('n');
+ylabel('Amplitude');
